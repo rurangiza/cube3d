@@ -1,0 +1,13 @@
+NO  textures/NO.xpm
+SO ./textures/SO.xpm
+WE ./textures/WE.xpm
+EA ./textures/EA.xpm
+
+F 182,182,0
+C 182,182,182
+
+111111
+100101
+101001
+1100N1
+111111

@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 20:59:37 by lupin             #+#    #+#             */
-/*   Updated: 2023/05/09 21:01:59 by lupin            ###   ########.fr       */
+/*   Created: 2022/10/03 15:18:50 by akorompa          #+#    #+#             */
+/*   Updated: 2022/10/07 16:13:14 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cube3d.h"
-
-int main(void)
+int	ft_isprint(int c)
 {
-    printf("Hello, wolrd\n");
-    return (EXIT_SUCCESS);
+	if (c >= 32 && c <= 126)
+		return (1);
+	return (0);
 }
