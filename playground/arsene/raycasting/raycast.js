@@ -6,7 +6,7 @@
 /*   By: arurangi <arurangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:03:45 by arurangi          #+#    #+#             */
-/*   Updated: 2023/05/12 15:47:04 by arurangi         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:02:55 by arurangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 // Global Variables
 ////////////////////////////////////////////////////////////////////////////
 
-const TILE_SIZE = 32;
+const TILE_SIZE = 48;
 const MAP_NUM_ROWS = 11;
 const MAP_NUM_COLS = 15;
 
@@ -25,7 +25,7 @@ const WINDOW_HEIGHT = MAP_NUM_ROWS * TILE_SIZE;
 
 const FOV_ANGLE = 60 * (Math.PI / 180);
 
-const WALL_STRIP_WIDTH = 1; 
+const WALL_STRIP_WIDTH = 3; 
 const NUM_RAYS = WINDOW_WIDTH / WALL_STRIP_WIDTH;
 
 ////////////////////////////////////////////////////////////////////////////
@@ -77,7 +77,7 @@ class Player {
 		this.turnDirection = 0; // -1 if left, +1 if right
 		this.walkDirection = 0; // -1 if back, +1 if front
 		this.rotationAngle = Math.PI / 2;
-		this.moveSpeed = 2.0;
+		this.moveSpeed = 3.0;
 		this.rotationSpeed = 2 * (Math.PI / 180);
 	}
 	update() {
@@ -112,7 +112,7 @@ class Ray {
 		this.rayAngle = rayAngle;
 	}
 	render() {
-		stroke("yellow");
+		stroke("red");
 		line(
 			player.x,
 			player.y,
@@ -170,7 +170,8 @@ function castAllRays() {
 	rays = [];
 
 	// loop all columns casting the rays
-	for (var i = 0; i < NUM_RAYS; i++) {
+	// for (var i = 0; i < NUM_RAYS; i++) {
+		for (var i = 0; i < 1; i++) {
 		var ray = new Ray(rayAngle);
 		// TODO: ray.cast()
 		rays.push(ray);
