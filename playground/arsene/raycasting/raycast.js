@@ -6,16 +6,31 @@
 /*   By: arurangi <arurangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:03:45 by arurangi          #+#    #+#             */
-/*   Updated: 2023/05/12 13:35:00 by arurangi         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:47:04 by arurangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+////////////////////////////////////////////////////////////////////////////
+// Global Variables
+////////////////////////////////////////////////////////////////////////////
 
 const TILE_SIZE = 32;
 const MAP_NUM_ROWS = 11;
 const MAP_NUM_COLS = 15;
 
-const WINDOW_WIDTH = MAP_NUM_COLS * TILE_SIZE
-const WINDOW_HEIGHT = MAP_NUM_ROWS * TILE_SIZE
+const RAY_LINE_LENGTH = 30
+
+const WINDOW_WIDTH = MAP_NUM_COLS * TILE_SIZE;
+const WINDOW_HEIGHT = MAP_NUM_ROWS * TILE_SIZE;
+
+const FOV_ANGLE = 60 * (Math.PI / 180);
+
+const WALL_STRIP_WIDTH = 1; 
+const NUM_RAYS = WINDOW_WIDTH / WALL_STRIP_WIDTH;
+
+////////////////////////////////////////////////////////////////////////////
+// Classes
+////////////////////////////////////////////////////////////////////////////
 
 class Map {
 	constructor() {
@@ -52,13 +67,13 @@ class Map {
 			}
 		}
 	}
-}
+}   
 
 class Player {
 	constructor() {
 		this.x = WINDOW_WIDTH / 2;
 		this.y = WINDOW_HEIGHT / 2;
-		this.radius = Math.floor(TILE_SIZE / 3);
+		this.radius = TILE_SIZE / 4;
 		this.turnDirection = 0; // -1 if left, +1 if right
 		this.walkDirection = 0; // -1 if back, +1 if front
 		this.rotationAngle = Math.PI / 2;
@@ -80,22 +95,44 @@ class Player {
 	}
 	render() {
 		noStroke();
-		fill("red");
+		fill("black");
 		circle(this.x, this.y, this.radius);
-		stroke("red");
+		//stroke("yellow");
 		line(
 			this.x,
 			this.y,
-			this.x + Math.cos(this.rotationAngle) * 30,
-			this.y + Math.sin(this.rotationAngle) * 30
+			this.x + Math.cos(this.rotationAngle) * RAY_LINE_LENGTH,
+			this.y + Math.sin(this.rotationAngle) * RAY_LINE_LENGTH
 		);
 	};
 }
 
-/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`~~~~~ */
+class Ray {
+	constructor(rayAngle) {
+		this.rayAngle = rayAngle;
+	}
+	render() {
+		stroke("yellow");
+		line(
+			player.x,
+			player.y,
+			player.x + Math.cos(this.rayAngle) * RAY_LINE_LENGTH,
+			player.y + Math.sin(this.rayAngle) * RAY_LINE_LENGTH
+		);
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////
+// Creating Classes
+////////////////////////////////////////////////////////////////////////////
 
 var grid = new Map();
 var player = new Player();
+var rays = [];
+
+////////////////////////////////////////////////////////////////////////////
+// User input
+////////////////////////////////////////////////////////////////////////////
 
 function keyPressed() {
 	if (keyCode == UP_ARROW) {
@@ -121,18 +158,47 @@ function keyReleased() {
 	}
 }
 
+////////////////////////////////////////////////////////////////////////////
+// Casting rays
+////////////////////////////////////////////////////////////////////////////
+function castAllRays() {
+	var columnId = 0;
+
+	// start first ray substracting half of the FOV
+	var rayAngle = player.rotationAngle - (FOV_ANGLE / 2);
+
+	rays = [];
+
+	// loop all columns casting the rays
+	for (var i = 0; i < NUM_RAYS; i++) {
+		var ray = new Ray(rayAngle);
+		// TODO: ray.cast()
+		rays.push(ray);
+		rayAngle += FOV_ANGLE / NUM_RAYS;
+
+		columnId++;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////
+// Rendering
+////////////////////////////////////////////////////////////////////////////
+
 function setup() {
-	// TOTO: initialize all objects
 	createCanvas(WINDOW_WIDTH, WINDOW_HEIGHT)
 }
 
 function update() {
 	player.update();
+	castAllRays();
 }
 
 function draw() {
 	update();
-	// TODO: render all objects frame by frame
+
 	grid.render();
+	for (ray of rays) {
+		ray.render();
+	}
 	player.render();
 }
