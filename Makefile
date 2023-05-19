@@ -1,11 +1,13 @@
 SRCS			= 	srcs/main.c \
+					srcs/cub3d.c \
+					srcs/events.c \
 					srcs/parsing.c \
 					srcs/get_map.c \
 					srcs/get_map_utils.c \
 					srcs/get_colors.c \
 					srcs/get_texture.c \
+					srcs/player.c \
 					srcs/utils.c \
-					srcs/init_data.c \
 					gnl/get_next_line.c \
 					gnl/get_next_line_utils.c \
 

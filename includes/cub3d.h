@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:02 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/11 13:22:53 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:30:37 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <stdbool.h>
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
 
@@ -27,6 +28,11 @@ typedef struct s_mlx
 {
 	void	*mlx;
 	void	*mlx_win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_lenght;
+	int		endian;
 	
 }	t_mlx;
 
@@ -43,18 +49,68 @@ typedef struct s_texture
 	char	*south;
 	char	*east;
 	char	*west;
+
+	int *widht;
+	int	*height;
 }	t_texture;
 
-typedef struct s_raycaster
+typedef struct s_ray
 {
+	double cam_x;
 	
-}	t_raycaster;
+	double ray_pos_x;
+	double ray_pos_y;
+	
+	double ray_dir_x;
+	double ray_dir_y;
+
+	double map_x;
+	double map_y;
+
+	double side_dist_x;
+	double side_dist_y;
+	
+	double delta_dist_x;
+	double delta_dist_y;
+	
+	int step_x;
+	int step_y;
+	
+	int hit;
+	int side;
+
+	double wall_dist;
+	
+}	t_ray;
+
+typedef struct s_cam
+{
+	double	pos_X;
+	double	pos_Y;
+
+	double dir_X;
+	double dir_Y;
+	
+	double plane_X;
+	double plane_Y;
+	
+	double	speedRotation;
+	double	speedWalking;
+
+	bool	move_up;
+	bool move_back;
+	bool move_right;
+	bool move_left;
+	bool turn;
+	bool display;
+}	t_cam;
 
 typedef struct s_data
 {
 	t_mlx		mlx;
 	t_texture	texture;
-	t_raycaster	ray;
+	t_cam		cam;
+	t_ray		ray;
 	
 	char	*file;
 	char	**map;
@@ -62,7 +118,17 @@ typedef struct s_data
 	
 	int		c_color;	//ceilling
 	int		f_color;	//floor
+	int		color;
 	
+	int		screen_widht;
+	int		screen_height;
+	
+	int x;
+	int y;
+
+	int	line_height;
+	int	draw_start;
+	int	draw_end;
 }	t_data;
 
 
@@ -78,11 +144,20 @@ int	is_map_char(char c);
 int	get_colors(t_data *data, char **file);
 int	get_texture(t_data *data, char **file);
 void	init_data(t_data *data);
+void	get_player(t_data *data);
 
 
 //~~~~~~~~~~~~~~~ UTILS ~~~~~~~~~~~~~~~~~~~~~~~//
 
 char	*get_map_line(char *str);
 void	ft_free_tab(char **tab);
+
+
+int	cub3d(t_data *data);
+
+int	ft_key_press(int keycode, t_data *data);
+int ft_key_release(int keycode, t_data *data);
+
+void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 #endif

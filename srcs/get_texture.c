@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:41:53 by akorompa          #+#    #+#             */
-/*   Updated: 2023/04/28 14:59:49 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/17 13:38:49 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	*store_texture(char *str)
 int	get_texture(t_data *data, char **file)
 {
 	int	i;
+	int fd;
 
 	i = 0;
 	while (file[i])
@@ -44,5 +45,7 @@ int	get_texture(t_data *data, char **file)
 			data->texture.east = store_texture(file[i]);	
 		i++;
 	}
+	fd = open(data->texture.north, O_RDONLY);
+	
 	return (0);
 }
