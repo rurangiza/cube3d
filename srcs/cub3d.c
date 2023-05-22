@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:59:59 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/19 14:09:23 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/19 18:34:25 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,13 +180,26 @@ int	cub3d(t_data *data)
 				data->draw_start = 0;
 			if (data->draw_end >= data->screen_height)
 				data->draw_end = data->screen_height - 1;
+			if (data->ray.side == 1)
+			{
+				data->texture.wall_x = data->ray.ray_pos_x + data->ray.wall_dist * data->ray.ray_dir_x;
+			}
+			else
+			{
+				data->texture.wall_x = data->ray.ray_pos_y + data->ray.wall_dist * data->ray.ray_dir_y;
+			}
+			data->texture.wall_x -= floor(data->texture.wall_x);
+			data->texture.tex_x = (int)(data->texture.wall_x * data->texture.widht);
+			if (data->ray.side == 0 && data->ray.ray_dir_x > 0)
+				data->texture.tex_x = data->texture.widht - data->texture.tex_x - 1;
+			if (data->ray.side == 1 && data->ray.ray_dir_y < 0)
+				data->texture.tex_x = data->texture.widht - data->texture.tex_x - 1;
 			data->y = data->draw_start;
 			while (data->y < data->draw_end)
 			{
-				data->color = 0xf2f2f2;
-				if (data->ray.side == 1)
-					data->color = 0xCCCCCC;
-				my_mlx_pixel_put(&data->mlx, data->x, data->y, data->color);
+				data->texture.tex_y = (int)((data->y * 2 - data->screen_height + data->line_height) * (data->texture.height / 2) / data->line_height);
+				data->texture.tex_color = ((unsigned int *)data->texture.tex_tab)[(data->texture.widht * data->texture.tex_y + data->texture.tex_x)];
+				my_mlx_pixel_put(&data->mlx, data->x, data->y, data->texture.tex_color);
 				data->y++;
 			}
 			data->x++;

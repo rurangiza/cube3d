@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:23 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/16 16:19:13 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:23:34 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	main(int ac, char **av)
 		return (printf("Error in init.\n"));
 	if (!parsing(&data, av[1]))
 		return(printf("Error in parsing\n"));
+	texture_loader(&data);
 	ft_create_img(&data);
 	mlx_hook(data.mlx.mlx_win, 2, 1L << 0, ft_key_press, &data);
 	mlx_hook(data.mlx.mlx_win, 3, 1L << 1, ft_key_release, &data);

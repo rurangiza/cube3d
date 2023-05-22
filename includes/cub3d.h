@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:02 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/17 15:30:37 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:06:28 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,16 @@ typedef struct s_rgb
 typedef struct s_texture
 {
 	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
 
-	int *widht;
-	int	*height;
+	int widht;
+	int	height;
+	void	*tex;
+	char	*tex_tab;
+	int	tex_color;
+
+	int tex_x;
+	int tex_y;
+	double wall_x;
 }	t_texture;
 
 typedef struct s_ray
@@ -152,6 +156,8 @@ void	get_player(t_data *data);
 char	*get_map_line(char *str);
 void	ft_free_tab(char **tab);
 
+void	texture_loader(t_data *data);
+int	get_texture_color(t_data *data, int x, int y);
 
 int	cub3d(t_data *data);
 

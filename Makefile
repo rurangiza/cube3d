@@ -8,6 +8,7 @@ SRCS			= 	srcs/main.c \
 					srcs/get_texture.c \
 					srcs/player.c \
 					srcs/utils.c \
+					srcs/texture.c \
 					gnl/get_next_line.c \
 					gnl/get_next_line_utils.c \
 
