@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:23 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 11:09:37 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:18:07 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	main(int ac, char **av)
 	data.mlx.mlx_win = mlx_new_window(data.mlx.mlx, 800, 640, "cub3d");
 	if (!data.mlx.mlx_win)
 		return (0);
-	texture_loader(&data);
+	if (!texture_loader(&data))
+		return (printf("Invalid textures files\n"));
 	ft_create_img(&data);
 	mlx_hook(data.mlx.mlx_win, 2, 1L << 0, ft_key_press, &data);
 	mlx_hook(data.mlx.mlx_win, 3, 1L << 1, ft_key_release, &data);
