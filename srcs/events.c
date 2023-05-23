@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:49:44 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/19 14:25:51 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:00:47 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,25 @@ int	ft_key_press(int keycode, t_data *data)
 		data->cam.move_left = true;
 	if (keycode == 2)
 		data->cam.move_right = true;
-	//pivot gauche
-	if (keycode == 123)
-	{
-		data->cam.turn = true;
-		data->cam.speedRotation = -0.1;
-	}
-	//pivot droit
 	if (keycode == 124)
 	{
 		data->cam.turn = true;
-		data->cam.speedRotation = 0.1;
+		data->cam.speedrotation = -0.1;
+	}
+	if (keycode == 123)
+	{
+		data->cam.turn = true;
+		data->cam.speedrotation = 0.1;
 	}
 	if (keycode == 53)
 	{
 		mlx_destroy_window(data->mlx.mlx, data->mlx.mlx_win);
 		exit (0);
 	}
-	return(1);
+	return (1);
 }
 
-int ft_key_release(int keycode, t_data *data)
+int	ft_key_release(int keycode, t_data *data)
 {
 	if (keycode == 13)
 		data->cam.move_up = false;
@@ -56,5 +54,5 @@ int ft_key_release(int keycode, t_data *data)
 		data->cam.turn = false;
 	if (keycode == 124)
 		data->cam.turn = false;
-	return(1);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:35:25 by akorompa          #+#    #+#             */
-/*   Updated: 2023/04/28 14:45:03 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:57:44 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**get_map(char **file, t_data *data)
 	size = map_size(file, data);
 	map = malloc(sizeof(char *) * (size + 1));
 	if (!map)
-		return(NULL);
+		return (NULL);
 	i = 0;
 	j = data->file_size - size;
 	while (i < size)

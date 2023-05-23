@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arurangi <arurangi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:10:32 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/19 15:49:46 by arurangi         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:01:10 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,12 +198,12 @@ int	parsing(t_data *data, char *map)
 	file = get_file(map, data);
 	if (!file)
 		return (0);
-	if (invalid_map(file))
-		return (errormsg("Invalid map", 0));
-	for (int i = 0; file[i] != NULL; i++)
-		printf("%s", file[i]);
+	// if (invalid_map(file))
+	// 	return (errormsg("Invalid map", 0));
+	// for (int i = 0; file[i] != NULL; i++)
+	// 	printf("%s", file[i]);
 	
-	exit(0);
+	//exit(0);
 
 	data->map = get_map(file, data);
 	get_colors(data, file);
@@ -214,7 +214,7 @@ int	parsing(t_data *data, char *map)
 	data->cam.move_right = false;
 	data->cam.turn = false;
 	data->cam.display = true;
-	data->cam.speedWalking = 0.1;
+	data->cam.speedwalking = 0.1;
 	data->screen_height = 640;
 	data->screen_widht = 800;
 	get_player(data);
