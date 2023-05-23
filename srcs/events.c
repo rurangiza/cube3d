@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:49:44 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 12:00:47 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:36:06 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	ft_key_press(int keycode, t_data *data)
 	if (keycode == 124)
 	{
 		data->cam.turn = true;
-		data->cam.speedrotation = -0.1;
+		data->cam.speedrotation = -0.05;
 	}
 	if (keycode == 123)
 	{
 		data->cam.turn = true;
-		data->cam.speedrotation = 0.1;
+		data->cam.speedrotation = 0.05;
 	}
 	if (keycode == 53)
 	{

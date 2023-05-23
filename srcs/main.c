@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:23 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:22:22 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/23 13:43:11 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,19 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	if (ac != 2)
-		return (printf("Usage: ./cub3d 'map.cub'.\n"));
+		return (errormsg("Usage: ./cub3d 'map.cub'.", 1));
 	if (!init_mlx(&data, av[1]))
-		return (printf("Error in init.\n"));
+		return (errormsg("In initiation", 1));
 	if (!parsing(&data, av[1]))
-		return (printf("Error in parsing\n"));
+		return (errormsg("In parsing", 1));
 	data.mlx.mlx = mlx_init();
 	if (!data.mlx.mlx)
 		return (0);
 	data.mlx.mlx_win = mlx_new_window(data.mlx.mlx, 800, 640, "cub3d");
 	if (!data.mlx.mlx_win)
 		return (0);
-	texture_loader(&data);
+	if (!texture_loader(&data))
+		return (errormsg("Invalid textures files", 1));
 	ft_create_img(&data);
 	mlx_hook(data.mlx.mlx_win, 2, 1L << 0, ft_key_press, &data);
 	mlx_hook(data.mlx.mlx_win, 3, 1L << 1, ft_key_release, &data);

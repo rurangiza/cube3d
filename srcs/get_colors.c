@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_colors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:14:53 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:23:08 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/23 13:38:45 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,21 @@ int	store_color(char *str)
 int	get_colors(t_data *data, char **file)
 {
 	int	i;
-	int	floor = 0, ceiling = 0;
-	
+	int	floor;
+	int	ceiling;
+
 	i = 0;
+	floor = 0;
+	ceiling = 0;
 	while (file[i])
 	{
-		if (ft_strncmp(file[i], "F", 1) == 0) {
+		if (ft_strncmp(file[i], "F", 1) == 0)
+		{
 			data->f_color = store_color(file[i]);
 			floor++;
 		}
-		if (ft_strncmp(file[i], "C", 1) == 0) {
+		if (ft_strncmp(file[i], "C", 1) == 0)
+		{
 			data->c_color = store_color(file[i]);
 			ceiling++;
 		}
