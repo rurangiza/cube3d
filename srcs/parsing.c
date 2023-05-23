@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:10:32 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:49:02 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/23 13:59:06 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,8 @@ int	parsing(t_data *data, char *map)
 	data->cam.speedwalking = 0.05;
 	data->screen_height = 640;
 	data->screen_widht = 800;
+	for(int i = 0; data->map[i];i++)
+		printf("%s\n", data->map[i]);
 	get_player(data);
 	return (1);
 }
