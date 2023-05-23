@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:23 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/22 10:20:27 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/23 10:03:25 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	main(int ac, char **av)
 		return (printf("Error in init.\n"));
 	if (!parsing(&data, av[1]))
 		return(printf("Error in parsing\n"));
+	//exit(0);
+
 	texture_loader(&data);
 	ft_create_img(&data);
 	mlx_hook(data.mlx.mlx_win, 2, 1L << 0, ft_key_press, &data);

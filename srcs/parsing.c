@@ -3,19 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arurangi <arurangi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:10:32 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/19 15:49:46 by arurangi         ###   ########.fr       */
+/*   Updated: 2023/05/23 12:04:19 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	errormsg(char *type, int code)
+#define ERROR 1
+#define SUCCESS 0
+#define TRUE	1
+#define FALSE	0
+#define MATCH	0
+
+int	errormsg(char *msg, int code)
 {
-	printf("Error: ");
-	printf("%s\n",type);
+	printf(CRED"Error: "CRESET);
+	printf("%s\n", msg);
+	return (code);
+}
+
+int	maperror(char *msg, t_number code, t_number line, t_number col)
+{
+	printf(CRED"Error: "CRESET);
+	printf("%s at ln %d, col %d\n", msg, line, col);
 	return (code);
 }
 
@@ -82,17 +95,38 @@ char	**get_file(char *map, t_data *data)
 	return (file);
 }
 
-int	is_start_of_map(char **map, int i)
+int	ft_isspace(char ch)
 {
-	if (!ft_strncmp("01", map[i], 2) || !ft_strncmp("10", map[i], 2) || !ft_strncmp("11", map[i], 2))
+	if ((ch >= 9 && ch <= 13) || ch == 32)
 		return (1);
 	return (0);
-			
 }
 
-int	invalid_characters(char *str)
+int	find_map_start(char **map)
 {
-	printf("---> Checking: invalid characters\n");
+	int	row = 0;
+
+	if (!map)
+		return (-1);
+	while (map[row])
+	{
+		int col = 0;
+		while (map[row][col] && ft_isspace(map[row][col]))
+			col++;
+		if (ft_strlen(map[row]+col) >= 2
+			&& ((map[row][col] == '0' && map[row][col+1] == '1')
+			|| (map[row][col] == '0' && map[row][col+1] == '0')
+			|| (map[row][col] == '1' && map[row][col+1] == '1')
+			|| (map[row][col] == '1' && map[row][col+1] == '1')))
+			return (row);
+		row++;
+	}
+	return (-1);
+}
+// Map is composed of only 6 possible characters
+// 0 1 N S E W
+int	invalid_characters(char *str, int row)
+{
 	int i = 0;
 	while (str[i])
 	{
@@ -102,9 +136,11 @@ int	invalid_characters(char *str)
 			&& str[i] != 'S'
 			&& str[i] != 'E'
 			&& str[i] != 'W'
-			&& str[i] != ' ')
+			&& !ft_isspace(str[i]))
 		{
-			printf("Error: invalid character (%c) at col [%d]\n", str[i], i);
+			printf("line = %s\n", str);
+			printf("%sError:%s invalid character %s(%c)%s at %s(ln %d, col %d)%s\n",
+				CRED, CRESET, CBLUE, str[i], CRESET, CBLUE, row+1, i, CRESET);
 			return (1);
 		}
 		i++;
@@ -112,83 +148,143 @@ int	invalid_characters(char *str)
 	return (0);
 }
 
-int	find_last_row(char **map, int i)
+int	find_last_row(char **map)
 {
+	int i = 0;
 	while (map[i])
 		i++;
 	return (i);
 }
 
-#define ERROR 1
-#define SUCCESS 0
 
-int	not_surrounded_by_walls(char *row, int i, int first_row_index, int last_row_index)
+/*
+first index must be '1'
+last index must be '1'
+Pseudocode:
+	- calculate maximum width of the map {map_width, prev_start, prev_end}
+	- initialize prev_start = 0 : anything before start must be '1' (wall)
+	- initialize prev_end = map_width
+	- traverse each line of the map
+		- ignore leading spaces
+		- calculate block_width (until `\0` or `space`)
+		- check character until reach `\0` or `space`
+			- if index < prev_start -> must be a wall
+			- if index > prev_end -> must be a wall
+		- ignore tailing spaces, report detached walls
+*/
+int not_surrounded_by_walls(char **map, int current_line, int __unused map_width, int *prev_start, int *prev_end)
 {
-	int k = 0;
+	char *line = map[current_line];
+	//  ignore leading spaces
+	int i = 0;
+	while (ft_isspace(line[i]))
+		i++;
+	int block_start = i;
 	
-	printf("---> Checking: surrounded by walls\n");
-	while (row[k] && row[k] == ' ')
-		k++;
-
-	if (i == first_row_index || i == last_row_index)
+	// 	calculate block_width (until `\0` or `space`)
+	int block_end = i;
+	while (line[block_end+1] && !ft_isspace(line[block_end+1]))
+		block_end++;
+	
+	// 	check character until reach `\0` or `space`
+	while (line[i] && !ft_isspace(line[i]))
 	{
-		while (row[k]) {
-			if (row[k] != '1')
-				return (errormsg("not surrounded by walls", ERROR));
+		if (line[i] != '1')
+		{
+			// handle edges (first and last)
+			if (i == block_start || i == block_end)
+				return (errormsg("no wall at: block start or end", TRUE));
+
+			// handle 1st and last line
+			else if (current_line == 0 || !map[current_line + 1])
+				return (errormsg("no wall at: first or last row", TRUE));
+
+			// handle previous narrow blocks
+			else if (i <= *prev_start || i >= *prev_end)
+				return (errormsg("no wall compared to prev_start", TRUE));
+
+			// handdle next narrow blocks
+			if (map[current_line + 1]) {
+				int next_start = 0;
+				while (map[current_line+1][next_start] && ft_isspace(map[current_line+1][next_start]))
+					next_start++;
+				if (i <= next_start)
+					return (errormsg("map: narrow block: next_start", TRUE));
+
+				int next_end = next_start;
+				while (map[current_line+1][next_end] && !ft_isspace(map[current_line+1][next_end]))
+					next_end++;
+				//printf("> current: %c\n", line[i]);
+				//printf("|.... nxt_End: %c\n", map[current_line+1][next_end-1]);
+				if (i >= next_end)
+				{
+					//printf("ln %d, col %d\n", current_line+1, i);
+					return (errormsg("map: narrow block: next_end", TRUE));
+				}
+			}
 		}
+		i++;
 	}
-	else
+
+	// 	ignore tailing spaces, report detached walls
+	while (line[i])
 	{
-		if (row[k] != '1')
-			return (errormsg("not surrounded by walls", ERROR));
-		while (row[k])
-			k++;
-		if (row[k - 1] != '1')
-			return (errormsg("not surrounded by walls", ERROR));
+		if (!ft_isspace(line[i]))
+			return (errormsg("map: detached block", TRUE));
+		i++;
 	}
+	*prev_start = block_start;
+	*prev_end = block_end;
+	return (FALSE);
+}
 
-	while (row[k])
-	{
-		if (row[k] != ' ')
-			return (errormsg("not surrounded by walls", ERROR));
-		k++;
+int calc_width(char **map)
+{
+	int	max_width;
+	int	current_width;
+	int	index;
+
+	max_width = 0;
+	index = 0;
+	while (map[index]) {
+		current_width = ft_strlen(map[index]);
+		if (current_width > max_width)
+			max_width = current_width;
+		index++;
 	}
-
-	return (SUCCESS);
-
-	// if ((row[0] && row[0] == '1') && (row[last] && row[last] == '1'))
-	// return (1);
-	
+	return (max_width - 1);
 }
 
 int	invalid_map(char **map)
 {
-	// Map is composed of only 6 possible characters
-	// 0 1 N S E W
-	printf("---> Checking if map is valid\n");
-	int i = 0, first_row, last_row;
+	printf("---> parsing map\n");
+
+	printf("Before: %s\n", map[0]);
+	
+	int	mapstart = find_map_start(map);
+	if (mapstart == -1)
+		return (errormsg("map: can't find map", INVALID));
+	map = &map[mapstart];
+
+	printf("After: %s\n", map[0]);
+
+	// Checking
+	int i = 0;
+	int map_width = calc_width(map);
+	int prev_start = 0;
+	int prev_end = map_width;
+
+	int __unused last_row = find_last_row(map);
+	
 	while (map[i])
 	{
-		// Find start of map
-		if (is_start_of_map(map, i))
-		{
-			printf("---> Found start of map\n");
-			first_row = i;
-			last_row = find_last_row(map, i);
-			// Traverse it
-			while (map[i])
-			{
-				if (invalid_characters(map[i])
-					|| not_surrounded_by_walls(map[i], i, first_row, last_row))
-					return (1);
-				// check for valid characters
-				i++;
-			}
-			return (0);
-		}
+		if (invalid_characters(map[i], i))
+			return (INVALID);
+		if (not_surrounded_by_walls(map, i, map_width, &prev_start, &prev_end))
+			return (INVALID);
 		i++;
 	}
-	return (0);
+	return (VALID);
 }
 
 int	parsing(t_data *data, char *map)
@@ -198,16 +294,23 @@ int	parsing(t_data *data, char *map)
 	file = get_file(map, data);
 	if (!file)
 		return (0);
-	if (invalid_map(file))
+	if (invalid_map(file)) {
 		return (errormsg("Invalid map", 0));
-	for (int i = 0; file[i] != NULL; i++)
-		printf("%s", file[i]);
-	
-	exit(0);
+	}
 
 	data->map = get_map(file, data);
-	get_colors(data, file);
-	get_texture(data, file);
+	// for (int i = 0; data->map[i] != NULL; i++) {
+	// 	printf("loop index: %d\n", i);
+	// 	printf("%s\n", data->map[i]);
+	// }
+	// exit(0);
+	
+
+	if (get_colors(data, file))
+		return (0);
+	if (get_texture(data, file))
+		return (0);
+	printf(CGREEN"✓ Valid map\n"CRESET);
 	data->cam.move_back = false;
 	data->cam.move_up = false;
 	data->cam.move_left = false;

@@ -1,0 +1,7 @@
+- colors: multiple commas
+- spaces in between any text, is valid, except in certain cases
+- character after the map: return error
+
+- check we have East, West, North, South
+- check if we have the colors (F ... and C ...)
+- check valid textures (ex: file exists aka permissions, )
