@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:10:32 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:21:55 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/23 13:46:48 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ int not_surrounded_by_walls(char **map, int current_line, int __unused map_width
 				return (errormsg("no wall at: first or last row", TRUE));
 
 			// handle previous narrow blocks
-			else if (i <= *prev_start || i >= *prev_end)
+			else if (i < *prev_start || i > *prev_end)
 				return (errormsg("no wall compared to prev_start", TRUE));
 
 			// handdle next narrow blocks
@@ -294,18 +294,9 @@ int	parsing(t_data *data, char *map)
 	file = get_file(map, data);
 	if (!file)
 		return (0);
-	if (invalid_map(file)) {
+	if (invalid_map(file))
 		return (errormsg("Invalid map", 0));
-	}
-
 	data->map = get_map(file, data);
-	// for (int i = 0; data->map[i] != NULL; i++) {
-	// 	printf("loop index: %d\n", i);
-	// 	printf("%s\n", data->map[i]);
-	// }
-	// exit(0);
-	
-
 	if (get_colors(data, file))
 		return (0);
 	if (get_texture(data, file))

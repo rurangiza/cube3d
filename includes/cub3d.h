@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:02 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:24:25 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/23 13:45:36 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_texture
 	int		tex_x;
 	int		tex_y;
 	double	wall_x;
+
 }	t_texture;
 
 typedef struct s_ray
