@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:14:53 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 11:20:35 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/23 13:23:08 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	store_color(char *str)
 	rgb.b = ft_atoi(line[2]);
 	color = int_to_color(&rgb);
 	ft_free_tab(line);
-	return(color);
+	return (color);
 }
 
 int	get_colors(t_data *data, char **file)
@@ -49,7 +49,7 @@ int	get_colors(t_data *data, char **file)
 	int	floor = 0, ceiling = 0;
 	
 	i = 0;
-	while(file[i])
+	while (file[i])
 	{
 		if (ft_strncmp(file[i], "F", 1) == 0) {
 			data->f_color = store_color(file[i]);

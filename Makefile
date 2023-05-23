@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lupin <lupin@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/23 13:24:37 by lupin             #+#    #+#              #
+#    Updated: 2023/05/23 13:24:38 by lupin            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SRCS			= 	srcs/main.c \
 					srcs/cub3d.c \
 					srcs/events.c \
@@ -9,6 +21,9 @@ SRCS			= 	srcs/main.c \
 					srcs/player.c \
 					srcs/utils.c \
 					srcs/texture.c \
+					srcs/move.c \
+					srcs/cub3d_utils.c \
+					srcs/move_utils.c \
 					gnl/get_next_line.c \
 					gnl/get_next_line_utils.c \
 
@@ -21,7 +36,7 @@ NAME 	= cub3d
 LIBFT = libft
 
 CC			= gcc $(CCFLAGS)
-CCFLAGS 	= -Wall -Wextra -Werror -fsanitize=address -g
+CCFLAGS 	= -Wall -Wextra -Werror
 MLX		= ./mlx
 MLX_LIB	= $(addprefix $(MLX),mlx.a)
 MLX_INC	= -I ./mlx

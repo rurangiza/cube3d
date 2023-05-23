@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 13:14:14 by akorompa          #+#    #+#             */
-/*   Updated: 2023/04/28 13:16:09 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:58:01 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_map_char(char c)
 {
-	if(c == ' ' || c == '\n')
+	if (c == ' ' || c == '\n')
 		return (1);
 	else if (c == '1' || c == '0')
 		return (1);
@@ -41,7 +41,7 @@ int	is_empty_line(char *line)
 int	is_map_line(char *line)
 {
 	int	i;
-	
+
 	i = 0;
 	if (is_empty_line(line))
 		return (0);
@@ -53,7 +53,7 @@ int	is_map_line(char *line)
 	}
 	if (i == (int)ft_strlen(line))
 		return (i);
-	return(0);
+	return (0);
 }
 
 int	map_size(char **file, t_data *data)
@@ -74,7 +74,7 @@ int	map_size(char **file, t_data *data)
 int	ft_strlen_mod(char *str)
 {
 	int	len;
-	
+
 	len = 0;
 	while (str[len] != '\n' && str[len] != '\0')
 		len++;
