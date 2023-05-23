@@ -3,26 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:02 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 11:59:51 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/23 13:24:25 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <mlx.h>
-# include <math.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <stdbool.h>
-# include "../libft/libft.h"
-# include "../gnl/get_next_line.h"
+#include "../mlx/mlx.h"
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdbool.h>
+#include "../libft/libft.h"
+#include "../gnl/get_next_line.h"
+
+# define CGRAY     "\x1b[30m"
+# define CRED     "\x1b[31m"
+# define CGREEN   "\x1b[32m"
+# define CYELLOW  "\x1b[33m"
+# define CBLUE    "\x1b[34m"
+# define CMAGENTA "\x1b[35m"
+# define CCYAN    "\x1b[36m"
+# define CWHITE    "\x1b[37m"
+# define CBOLD   "\x1b[1m"
+# define CRESET   "\x1b[0m"
 
 # define BUFFER_SIZE 5
+# define INVALID 1
+# define VALID 0
+
+typedef unsigned char t_number;
 
 typedef struct s_mlx
 {
@@ -170,5 +185,8 @@ int		ft_key_press(int keycode, t_data *data);
 int		ft_key_release(int keycode, t_data *data);
 
 void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+
+// NEW
+int	errormsg(char *msg, int code);
 
 #endif
