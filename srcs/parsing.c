@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:10:32 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:21:55 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/23 13:41:01 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 int	errormsg(char *msg, int code)
 {
-	printf(CRED"Error: "CRESET);
+	printf(CRED"Error\n"CRESET);
 	printf("%s\n", msg);
 	return (code);
 }
@@ -317,7 +317,7 @@ int	parsing(t_data *data, char *map)
 	data->cam.move_right = false;
 	data->cam.turn = false;
 	data->cam.display = true;
-	data->cam.speedwalking = 0.1;
+	data->cam.speedwalking = 0.05;
 	data->screen_height = 640;
 	data->screen_widht = 800;
 	get_player(data);
