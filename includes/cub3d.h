@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:02 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:45:36 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/23 14:45:30 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@
 # define BUFFER_SIZE 5
 # define INVALID 1
 # define VALID 0
+# define ERROR 1
+# define SUCCESS 0
+# define TRUE	1
+# define FALSE	0
+# define MATCH	0
 
 typedef unsigned char t_number;
 
@@ -154,7 +159,7 @@ typedef struct s_data
 
 //~~~~~~~~~~~~~~~ PARSING ~~~~~~~~~~~~~~~~~~~~~~~//
 
-int		parsing(t_data *data, char *map);
+int		init_data(t_data *data, char *map);
 char	**get_map(char **file, t_data *data);
 int		ft_strlen_mod(char *str);
 int		map_size(char **file, t_data *data);

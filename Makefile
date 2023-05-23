@@ -6,7 +6,7 @@
 #    By: lupin <lupin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 13:24:37 by lupin             #+#    #+#              #
-#    Updated: 2023/05/23 13:24:38 by lupin            ###   ########.fr        #
+#    Updated: 2023/05/23 13:55:13 by lupin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ NAME 	= cub3d
 LIBFT = libft
 
 CC			= gcc $(CCFLAGS)
-CCFLAGS 	= -Wall -Wextra -Werror
+CCFLAGS 	= -Wall -Wextra -Werror 
+#-g -fsanitize=address
 MLX		= ./mlx
 MLX_LIB	= $(addprefix $(MLX),mlx.a)
 MLX_INC	= -I ./mlx

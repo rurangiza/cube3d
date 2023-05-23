@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:23 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:43:11 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:45:02 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int ac, char **av)
 		return (errormsg("Usage: ./cub3d 'map.cub'.", 1));
 	if (!init_mlx(&data, av[1]))
 		return (errormsg("In initiation", 1));
-	if (!parsing(&data, av[1]))
+	if (!init_data(&data, av[1]))
 		return (errormsg("In parsing", 1));
 	data.mlx.mlx = mlx_init();
 	if (!data.mlx.mlx)
