@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lupin <lupin@student.42.fr>                +#+  +:+       +#+         #
+#    By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 13:24:37 by lupin             #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/05/23 13:55:13 by lupin            ###   ########.fr        #
+=======
+#    Updated: 2023/05/23 14:37:41 by akorompa         ###   ########.fr        #
+>>>>>>> ad3cfc317f704f10b71ef09888963ab8a0914bd9
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +40,7 @@ NAME 	= cub3d
 LIBFT = libft
 
 CC			= gcc $(CCFLAGS)
-CCFLAGS 	= -Wall -Wextra -Werror 
-#-g -fsanitize=address
+CCFLAGS 	= -Wall -Wextra -Werror -fsanitize=address -g
 MLX		= ./mlx
 MLX_LIB	= $(addprefix $(MLX),mlx.a)
 MLX_INC	= -I ./mlx

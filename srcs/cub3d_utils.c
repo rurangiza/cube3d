@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:03:14 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 12:00:20 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:34:14 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	raycast_find_wall(t_data *data)
 			data->ray.map_y += data->ray.step_y;
 			data->ray.side = 1;
 		}
-		if (data->map[(int)data->ray.map_x][(int)data->ray.map_y] == '1')
+		if (data->map[(int)data->ray.map_y][(int)data->ray.map_x] == '1')
 			data->ray.hit = 1;
 	}
 }

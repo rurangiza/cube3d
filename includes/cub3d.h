@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:02 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 14:45:30 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/23 16:31:41 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void	get_player(t_data *data);
 char	*get_map_line(char *str);
 void	ft_free_tab(char **tab);
 void	ft_free_all(t_data *data);
+char	**reverse(t_data *data);
 
 int		texture_loader(t_data *data);
 
