@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:28:31 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 14:05:55 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:31:50 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	position_player_2(t_data *data, char c)
 
 void	position_player(t_data *data, int i, int j, char c)
 {
-	data->cam.pos_x = (double)i + 0.5;
-	data->cam.pos_y = (double)j + 0.5;
+	data->cam.pos_x = (double)j + 0.5;
+	data->cam.pos_y = (double)i + 0.5;
 	if (c == 'N')
 	{
 		data->cam.dir_x = 0;

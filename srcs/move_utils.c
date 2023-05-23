@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:28:22 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 12:10:49 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:56:56 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	move_left(t_data *data, t_cam *cam)
 
 	x = cam->pos_x - cam->plane_x * cam->speedwalking;
 	y = cam->pos_y - cam->plane_y * cam->speedwalking;
-	if (data->map[(int)(x)][(int)cam->pos_y] != 49
-		&& data->map[(int)(x)][(int)(cam->pos_y + 0.1)] != 49
-		&& data->map[(int)((x) + 0.1)][(int)cam->pos_y] != 49
-		&& data->map[(int)(x)][(int)(cam->pos_y - 0.1)] != 49
-		&& data->map[(int)((x) - 0.1)][(int)cam->pos_y] != 49)
+	if (data->map[(int)cam->pos_y][(int)x] != 49
+		&& data->map[(int)(cam->pos_y + 0.1)][(int)x] != 49
+		&& data->map[(int)cam->pos_y][(int)(x + 0.1)] != 49
+		&& data->map[(int)(cam->pos_y - 0.1)][(int)x] != 49
+		&& data->map[(int)cam->pos_y][(int)(x - 0.1)] != 49)
 		cam->pos_x -= cam->plane_x * cam->speedwalking;
-	if (data->map[(int)cam->pos_x][(int)(y)] != 49
-		&& data->map[(int)(cam->pos_x + 0.1)][(int)(y)] != 49
-		&& data->map[(int)cam->pos_x][(int)((y) + 0.1)] != 49
-		&& data->map[(int)(cam->pos_x - 0.1)][(int)(y)] != 49
-		&& data->map[(int)cam->pos_x][(int)((y) - 0.1)] != 49)
+	if (data->map[(int)y][(int)cam->pos_x] != 49
+		&& data->map[(int)y][(int)(cam->pos_x + 0.1)] != 49
+		&& data->map[(int)(y + 0.1)][(int)cam->pos_x] != 49
+		&& data->map[(int)y][(int)(cam->pos_x - 0.1)] != 49
+		&& data->map[(int)(y - 0.1)][(int)cam->pos_x] != 49)
 		cam->pos_y -= cam->plane_y * cam->speedwalking;
 }
