@@ -6,21 +6,21 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:02 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/24 16:03:09 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/24 16:53:00 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "../mlx/mlx.h"
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdbool.h>
-#include "../libft/libft.h"
-#include "../gnl/get_next_line.h"
+# include "../mlx/mlx.h"
+# include <math.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <stdbool.h>
+# include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 
 # define CGRAY     "\x1b[30m"
 # define CRED     "\x1b[31m"
@@ -42,7 +42,7 @@
 # define FALSE	0
 # define MATCH	0
 
-typedef unsigned char t_number;
+typedef unsigned char	t_number;
 
 typedef struct s_mlx
 {
@@ -168,7 +168,6 @@ int		is_empty_line(char *line);
 int		is_map_char(char c);
 int		get_colors(t_data *data, char **file);
 int		get_texture(t_data *data, char **file);
-//void	init_data(t_data *data);
 void	get_player(t_data *data);
 
 //~~~~~~~~~~~~~~~ UTILS ~~~~~~~~~~~~~~~~~~~~~~~//
@@ -198,9 +197,25 @@ char	**get_file(char *map, t_data *data);
 int		file_size(int fd);
 char	**fill_file(int size, int fd);
 
-int	errormsg(char *msg, int code);
-int	maperror(t_number line, t_number col);
-int	invalid_map(char **map);
-int	ft_isspace(char ch);
+/* ~~~~~~~~~~~~~~~~~ ERROR HANDLING ~~~~~~~~~~~~~~~~ */
+
+int		errormsg(char *msg, int code);
+int		maperror(t_number line, t_number col);
+int		maperror_v2(char *msg, t_number line, t_number col);
+int		ft_isspace(char ch);
+
+/* ~~~~~~~~~~~~~~~~~~~ MAP CHECKING ~~~~~~~~~~~~~~~~~~~~~ */
+
+int		invalid_map(char **map);
+
+int		invalid_characters(char *str, int row);
+int		is_surrounded_by_walls(char **map, int current_row);
+int		not_surrounded(char **map, int current_row, int i);
+
+int		lastrow(char **map);
+int		find_map_start(char **map);
+int		isvoid(char ch);
+int		calc_linewidth(char **map, int index, int offset);
+void	ignore_leading_spaces(char *line, int *i);
 
 #endif

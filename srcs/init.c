@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:10:32 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/24 13:49:17 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/24 16:48:56 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ int	file_size(int fd)
 	int		size;
 	int		byte_read;
 	int		i;
-	
+
 	size = 1;
 	i = 0;
 	byte_read = read(fd, buffer, 5000000);
 	if (byte_read <= 0)
 	{
 		printf("Empty file\n");
-		return(0);
+		return (0);
 	}
 	buffer[byte_read + 1] = '\0';
 	while (buffer[i] != '\0')
@@ -107,8 +107,3 @@ char	**fill_file(int size, int fd)
 	file[i] = 0;
 	return (file);
 }
-
-
-
-
-

@@ -6,14 +6,13 @@
 #    By: lupin <lupin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 13:24:37 by lupin             #+#    #+#              #
-#    Updated: 2023/05/24 11:37:18 by lupin            ###   ########.fr        #
+#    Updated: 2023/05/24 16:51:13 by lupin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS			= 	srcs/main.c \
 					srcs/cub3d.c \
 					srcs/events.c \
-					srcs/parsing.c \
 					srcs/get_map.c \
 					srcs/get_map_utils.c \
 					srcs/get_colors.c \
@@ -28,6 +27,7 @@ SRCS			= 	srcs/main.c \
 					srcs/map_checker.c \
 					srcs/checker.c \
 					srcs/error_handling.c \
+					srcs/calc.c \
 					gnl/get_next_line.c \
 					gnl/get_next_line_utils.c \
 
