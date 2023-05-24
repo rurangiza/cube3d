@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handle.c                                     :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:41:57 by lupin             #+#    #+#             */
-/*   Updated: 2023/05/23 14:42:22 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/24 16:05:01 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ int	errormsg(char *msg, int code)
 	return (code);
 }
 
-int	maperror(char *msg, t_number code, t_number line, t_number col)
+int	maperror(t_number line, t_number col)
 {
-	printf(CRED"Error: "CRESET);
-	printf("%s at ln %d, col %d\n", msg, line, col);
-	return (code);
+	printf(CBOLD CRED"Error\n"CRESET);
+	printf(CBOLD"map: "CRESET);
+	printf("not closed at %s(ln %d, col %d)%s\n", CBLUE, line, col, CRESET);
+	return (1);
 }

@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+         #
+#    By: lupin <lupin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 13:24:37 by lupin             #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/05/23 13:55:13 by lupin            ###   ########.fr        #
-=======
-#    Updated: 2023/05/23 14:37:41 by akorompa         ###   ########.fr        #
->>>>>>> ad3cfc317f704f10b71ef09888963ab8a0914bd9
+#    Updated: 2023/05/24 11:37:18 by lupin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +24,10 @@ SRCS			= 	srcs/main.c \
 					srcs/move.c \
 					srcs/cub3d_utils.c \
 					srcs/move_utils.c \
+					srcs/init.c \
+					srcs/map_checker.c \
+					srcs/checker.c \
+					srcs/error_handling.c \
 					gnl/get_next_line.c \
 					gnl/get_next_line_utils.c \
 

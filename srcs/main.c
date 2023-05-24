@@ -6,11 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:23 by akorompa          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/23 14:45:02 by lupin            ###   ########.fr       */
-=======
-/*   Updated: 2023/05/23 14:56:06 by akorompa         ###   ########.fr       */
->>>>>>> ad3cfc317f704f10b71ef09888963ab8a0914bd9
+/*   Updated: 2023/05/24 13:48:55 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +67,7 @@ int	main(int ac, char **av)
 	if (!init_mlx(&data, av[1]))
 		return (errormsg("In initiation", 1));
 	if (!init_data(&data, av[1]))
-		return (errormsg("In parsing", 1));
+		return (errormsg("couldn't initialize data", 1));
 	data.mlx.mlx = mlx_init();
 	if (!data.mlx.mlx)
 		return (0);

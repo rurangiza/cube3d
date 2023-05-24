@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:10:32 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 14:46:31 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/24 13:49:17 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init_data(t_data *data, char *map)
 	if (!file)
 		return (0);
 	if (invalid_map(file))
-		return (errormsg("Invalid map", 0));
+		return (0);
 	data->map = get_map(file, data);
 	if (get_colors(data, file))
 		return (0);
@@ -47,13 +47,19 @@ char	**get_file(char *map, t_data *data)
 	file = NULL;
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
+	{
+		errormsg("can't open map file", 0);
 		return (NULL);
+	}
 	data->file_size = file_size(fd);
 	close(fd);
 	fd = open(map, O_RDONLY);
 	file = fill_file(data->file_size, fd);
 	if (!file)
+	{
+		errormsg("parsing: can't fill the file", 0);
 		return (NULL);
+	}
 	return (file);
 }
 

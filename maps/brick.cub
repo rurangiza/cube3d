@@ -1,7 +1,7 @@
-NO textures/naturalbricks_hd_verydark.xpm
-SO textures/naturalbricks_hd_middle.xpm
-EA textures/naturalbricks_hd_middle.xpm
-WE textures/naturalbricks_hd_middle.xpm
+NO  ./textures/wall_4.xpm
+SO ./textures/wood.xpm
+EA ./textures/mossy.xpm
+WE ./textures/colorstone.xpm
 
 C 155,100,160
 F 111,111,111

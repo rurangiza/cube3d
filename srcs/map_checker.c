@@ -6,31 +6,36 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:43:55 by lupin             #+#    #+#             */
-/*   Updated: 2023/05/23 14:59:55 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/24 16:07:06 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+int	lastrow(char **map);
+int	find_map_start(char **map);
+int calc_maxwidth(char **map);
+int	invalid_characters(char *str, int row);
+int isvoid(char ch);
+int calc_linewidth(char **map, int index, int offset);
+void ignore_leading_spaces(char *line, int *i);
+int not_surrounded_by_walls(char **map, int current_row);
+
 int	invalid_map(char **map)
 {
 	int	index;
 	int	mapstart;
-	int	prev_line_start;
-	int prev_line_end;
 
 	mapstart = find_map_start(map);
 	if (mapstart == -1)
 		return (errormsg("map: can't find map", INVALID));
 	map = &map[mapstart];
-	prev_line_start = 0;
-	prev_line_end = calc_maxwidth(map);
 	index = 0;
 	while (map[index])
 	{
 		if (invalid_characters(map[index], index))
 			return (TRUE);
-		if (not_surrounded_by_walls(map, index, &prev_line_start, &prev_line_end))
+		if (not_surrounded_by_walls(map, index))
 			return (TRUE);
 		index++;
 	}
@@ -76,7 +81,6 @@ int calc_maxwidth(char **map)
 	return (max_width - 1);
 }
 
-// 0 1 N S E W
 int	invalid_characters(char *str, int row)
 {
 	int i = 0;
@@ -100,78 +104,67 @@ int	invalid_characters(char *str, int row)
 	return (0);
 }
 
-int not_surrounded_by_walls(char **map, int current_line, int *prev_start, int *prev_end)
+int isvoid(char ch)
 {
-	char *line;
-    int i;
-    int block_start;
-    int block_end;
-    
-    line = map[current_line];
-	i = 0;
-    block_start = ignore_leading_spaces(line, i);
-	block_end = block_start;
-	while (line[block_end+1] && !ft_isspace(line[block_end+1]))
-		block_end++;	
-	while (line[i] && !ft_isspace(line[i]))
-	{
-		if (line[i] != '1')
-		{
-			if (i == block_start || i == block_end) // handle edges (first and last)
-				return (errormsg("no wall at: block start or end", TRUE));
-			else if (current_line == 0 || !map[current_line + 1]) // handle 1st and last line
-				return (errormsg("no wall at: first or last row", TRUE));
-			else if (i < *prev_start || i > *prev_end) // handle previous narrow blocks
-				return (errormsg("no wall compared to prev_start", TRUE));
-            if (next_line_missmatch())
-                return (errormsg("map: narrow block: next_start", TRUE));
-		}
-		i++;
-	}
-    if (ignore_tailing_spaces())
-        return (errormsg("map: detached block", TRUE));
-	*prev_start = block_start;
-	*prev_end = block_end;
-	return (FALSE);
+    if (ft_isspace(ch) || ch == '\n')
+        return (TRUE);
+    return (FALSE);   
 }
 
-int ignore_leading_spaces(char *line, int *i)
-{
+int calc_linewidth(char **map, int index, int offset) {
+	int width;
+
+	width = 0;
+	if (!map[index + offset])
+		return (width);
+	while (map[index + offset][width] && map[index + offset][width] != '\n')
+		width++;
+	return (width - 1);
+}
+
+void ignore_leading_spaces(char *line, int *i) {
     while (ft_isspace(line[*i]))
         *i += 1;
 }
 
-int next_line_missmatch(char **map, int current_line, int i)
-{
-    if (map[current_line + 1])
-    { 
-        int next_start = 0;
-        while (map[current_line+1][next_start]
-            && ft_isspace(map[current_line+1][next_start]))
-            next_start++;
-        if (i <= next_start)
-            return (TRUE);
-        int next_end = next_start;
-        while (map[current_line+1][next_end]
-            && !ft_isspace(map[current_line+1][next_end]))
-            next_end++;
-        if (i >= next_end)
-            return (TRUE);
-    }
-    return (FALSE);
-}
-
-int ignore_tailing_spcaes(char *line, int *i)
-{
-    while (line[i])
-	{
-		if (!ft_isspace(line[i]))
-			return (1);
+int	lastrow(char **map) {
+	int i = 0;
+	while (map[i])
 		i++;
-	}
-    return (0);
+	return (i - 1);
 }
 
+int not_surrounded_by_walls(char **map, int current_row)
+{
+    int i;
 
-
-
+	i = 0;
+    while (map[current_row][i] && map[current_row][i] != '\n')
+	{
+        ignore_leading_spaces(map[current_row], &i);
+		if (i > calc_linewidth(map, current_row, 0))
+			return (FALSE);
+        if (map[current_row][i] != '1')
+		{
+            if (current_row == 0 || current_row == lastrow(map))
+                return (maperror(current_row, i));
+			else if (i == 0)
+				return (maperror(current_row, i));
+            else
+            {
+                if (calc_linewidth(map, current_row, -1) < i
+					|| (calc_linewidth(map, current_row, -1) >= i && isvoid(map[current_row-1][i])))
+                    return (maperror(current_row, i));
+                else if (calc_linewidth(map, current_row, +1) < i
+					|| (calc_linewidth(map, current_row, +1) >= i && isvoid(map[current_row+1][i])))
+                    return (maperror(current_row, i));
+                else if (map[current_row][i + 1] && isvoid(map[current_row][i + 1]))
+					return (maperror(current_row, i));
+                else if (map[current_row][i - 1] && isvoid(map[current_row][i - 1]))
+                    return (maperror(current_row, i));
+            }
+        }
+        i++;
+    }
+	return (FALSE);
+}

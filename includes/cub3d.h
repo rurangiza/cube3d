@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:02 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 16:31:41 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/24 16:03:09 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ int		is_empty_line(char *line);
 int		is_map_char(char c);
 int		get_colors(t_data *data, char **file);
 int		get_texture(t_data *data, char **file);
-void	init_data(t_data *data);
+//void	init_data(t_data *data);
 void	get_player(t_data *data);
 
 //~~~~~~~~~~~~~~~ UTILS ~~~~~~~~~~~~~~~~~~~~~~~//
@@ -194,6 +194,13 @@ int		ft_key_release(int keycode, t_data *data);
 void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 
 // NEW
+char	**get_file(char *map, t_data *data);
+int		file_size(int fd);
+char	**fill_file(int size, int fd);
+
 int	errormsg(char *msg, int code);
+int	maperror(t_number line, t_number col);
+int	invalid_map(char **map);
+int	ft_isspace(char ch);
 
 #endif
