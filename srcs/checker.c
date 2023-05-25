@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:43:10 by lupin             #+#    #+#             */
-/*   Updated: 2023/05/24 16:46:49 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/25 06:06:49 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	isvoid(char ch)
 	return (FALSE);
 }
 
-int	invalid_characters(char *str, int row)
+int	invalid_characters(char *str, int row, int *foundplayer)
 {
 	int	i;
 
@@ -43,6 +43,8 @@ int	invalid_characters(char *str, int row)
 		{
 			return (maperror_v2("invalid character", row + 1, i));
 		}
+		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'W' || str[i] == 'E')
+			*foundplayer = TRUE;
 		i++;
 	}
 	return (0);

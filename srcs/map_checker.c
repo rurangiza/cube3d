@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:43:55 by lupin             #+#    #+#             */
-/*   Updated: 2023/05/24 16:52:43 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/25 06:08:02 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,24 @@ int	invalid_map(char **map)
 {
 	int	index;
 	int	mapstart;
+	int	foundplayer;
 
 	mapstart = find_map_start(map);
 	if (mapstart == -1)
-		return (errormsg("map: can't find map", INVALID));
+		return (errormsg("map: can't find map", TRUE));
 	map = &map[mapstart];
 	index = 0;
+	foundplayer = FALSE;
 	while (map[index])
 	{
-		if (invalid_characters(map[index], index))
+		if (invalid_characters(map[index], index, &foundplayer))
 			return (TRUE);
 		if (!is_surrounded_by_walls(map, index))
 			return (TRUE);
 		index++;
 	}
+	if (!foundplayer)
+		return (errormsg("no player found", TRUE));
 	return (FALSE);
 }
 

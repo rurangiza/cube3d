@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:02 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/24 16:53:00 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/25 06:04:10 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ int		ft_isspace(char ch);
 
 int		invalid_map(char **map);
 
-int		invalid_characters(char *str, int row);
+int		invalid_characters(char *str, int row, int *foundplayer);
 int		is_surrounded_by_walls(char **map, int current_row);
 int		not_surrounded(char **map, int current_row, int i);
 
