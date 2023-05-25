@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:43:55 by lupin             #+#    #+#             */
-/*   Updated: 2023/05/25 06:08:02 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/25 12:41:12 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int	invalid_map(char **map)
 			return (TRUE);
 		index++;
 	}
-	if (!foundplayer)
-		return (errormsg("no player found", TRUE));
+	if (foundplayer == 0)
+		return (errormsg("\x1b[1mmap:\033[0m no player found", TRUE));
+	else if (foundplayer > 1)
+		return (errormsg("\x1b[1mmap:\033[m too many players", TRUE));
 	return (FALSE);
 }
 
