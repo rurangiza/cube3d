@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arurangi <arurangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:10:32 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/24 16:48:56 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/30 11:13:50 by arurangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	init_data(t_data *data, char *map)
 
 	file = get_file(map, data);
 	if (!file)
-		return (0);
+		return (errormsg("couldn't extract map file", 0));
 	if (invalid_map(file))
 		return (0);
 	data->map = get_map(file, data);

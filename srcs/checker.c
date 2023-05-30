@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: arurangi <arurangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:43:10 by lupin             #+#    #+#             */
-/*   Updated: 2023/05/25 12:39:08 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/30 11:27:11 by arurangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	invalid_characters(char *str, int row, int *foundplayer)
 		}
 		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'W' || str[i] == 'E')
 			*foundplayer += 1;
+		if (str[i+1] == '\n' && ft_isspace(str[i]))
+			maperror_v2("extra space at end of line", row + 1, i);
 		i++;
 	}
 	return (0);
