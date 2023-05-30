@@ -3,7 +3,7 @@ SO ./textures/wood.xpm
 EA ./textures/mossy.xpm
 WE ./textures/colorstone.xpm
 
-F d 0,0,255
+F 0,0,255
 C 182,182,0
 
 11111111111111
