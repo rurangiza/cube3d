@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:14:53 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/30 10:43:22 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/30 10:50:27 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ int	store_color(char *str)
 	tmp = ft_split(str, ' ');
 	if (!tmp)
 		return (0);
-	if (ft_tablen(tmp) > 2)
-	{
-		ft_free_tab(tmp);
-		return (-1);
-	}
 	line = ft_split(tmp[1], ',');
 	if (!line)
 		return (0);
+	if (ft_tablen(line) > 3 || ft_tablen(tmp) > 2)
+	{
+		ft_free_tab(tmp);
+		ft_free_tab(line);
+		return (-1);
+	}
 	ft_free_tab(tmp);
 	rgb.r = ft_atoi(line[0]);
 	rgb.g = ft_atoi(line[1]);
