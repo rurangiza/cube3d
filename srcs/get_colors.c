@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_colors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arurangi <arurangi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:14:53 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/30 11:33:44 by arurangi         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:36:32 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,26 @@ int	ft_tablen(char **tab)
 	return (len);
 }
 
+int	ft_check_color(char **color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (color[i])
+	{
+		j = 0;
+		while (color[i][j])
+		{
+			if (!ft_isdigit(color[i][j]) && color[i][j] != '\n')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	store_color(char *str)
 {
 	t_rgb	rgb;
@@ -44,11 +64,11 @@ int	store_color(char *str)
 	line = ft_split(tmp[1], ',');
 	if (!line)
 		return (0);
-	if (ft_tablen(line) > 3 || ft_tablen(tmp) > 2)
+	if (ft_tablen(line) > 3 || ft_tablen(tmp) > 2 || ft_check_color(line))
 	{
 		ft_free_tab(tmp);
 		ft_free_tab(line);
-		return (errormsg("map: store_color(): too many values", -1));
+		return (errormsg("map: error in colors", -1));
 	}
 	ft_free_tab(tmp);
 	rgb.r = ft_atoi(line[0]);
