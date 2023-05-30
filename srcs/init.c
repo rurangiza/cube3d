@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:10:32 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/30 13:21:23 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:52:15 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	init_data(t_data *data, char *map)
 	if (invalid_map(file))
 		return (0);
 	data->map = get_map(file, data);
+	if (!data->map)
+		return (0);
 	if (get_colors(data, file))
 		return (0);
 	if (get_texture(data, file))

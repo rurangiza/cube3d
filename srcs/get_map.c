@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:35:25 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:22:31 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/30 14:15:09 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	check_char_map(char **map)
+{
+	int	j;
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (!is_map_char(map[i][j]))
+			{
+				ft_free_tab(map);
+				return (0);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
 
 char	**get_map(char **file, t_data *data)
 {

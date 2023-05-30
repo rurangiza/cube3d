@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:14:53 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/30 13:36:32 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:18:09 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	store_color(char *str)
 	line = ft_split(tmp[1], ',');
 	if (!line)
 		return (0);
-	if (ft_tablen(line) > 3 || ft_tablen(tmp) > 2 || ft_check_color(line))
+	if (ft_tablen(line) != 3 || ft_tablen(tmp) != 2 || ft_check_color(line))
 	{
 		ft_free_tab(tmp);
 		ft_free_tab(line);

@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:23 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/30 13:25:26 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/30 13:38:04 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ int	main(int ac, char **av)
 	if (!texture_loader(&data))
 		return (errormsg("Invalid textures files", 1));
 	ft_create_img(&data);
-	for(int i = 0; data.map[i]; i++)
-		printf("%s\n", data.map[i]);
 	mlx_hook(data.mlx.mlx_win, 2, 1L << 0, ft_key_press, &data);
 	mlx_hook(data.mlx.mlx_win, 3, 1L << 1, ft_key_release, &data);
 	mlx_hook(data.mlx.mlx_win, 17, 0, ft_close, &data);
