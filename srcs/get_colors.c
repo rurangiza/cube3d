@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:14:53 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/30 10:50:27 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/30 11:06:21 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	store_color(char *str)
 	{
 		ft_free_tab(tmp);
 		ft_free_tab(line);
-		return (-1);
+		return (errormsg("map: store_color(): too many values", -1));
 	}
 	ft_free_tab(tmp);
 	rgb.r = ft_atoi(line[0]);
