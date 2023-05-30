@@ -45,7 +45,7 @@ int	invalid_characters(char *str, int row, int *foundplayer)
 		}
 		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'W' || str[i] == 'E')
 			*foundplayer += 1;
-		if (str[i+1] == '\n' && ft_isspace(str[i]))
+		if (str[i + 1] == '\n' && ft_isspace(str[i]))
 			maperror_v2("extra space at end of line", row + 1, i);
 		i++;
 	}

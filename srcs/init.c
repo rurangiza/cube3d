@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 16:10:32 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/30 13:52:15 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:06:26 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	init_data(t_data *data, char *map)
 	data->screen_height = 640;
 	data->screen_widht = 800;
 	get_player(data);
-	ft_free_tab(file);
 	return (1);
 }
 

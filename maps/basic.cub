@@ -4,7 +4,7 @@ EA ./textures/mossy.xpm
 WE ./textures/colorstone.xpm
 
 C 182,182,0
-F 0,0255
+F 0,0,255
 
 	11111111111111
 	10000000000001

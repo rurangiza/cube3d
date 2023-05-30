@@ -14,11 +14,9 @@
 
 int	check_xpm2(char *texture)
 {
-	char	*tmp;
 	int		i;
 
 	i = 0;
-	tmp = NULL;
 	i = ft_strlen(texture) - 1;
 	while (texture[i--] == 'm')
 	{

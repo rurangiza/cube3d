@@ -6,7 +6,7 @@
 /*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:41:53 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:23:20 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/30 15:06:40 by lupin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int	get_texture(t_data *data, char **file)
 		i++;
 	}
 	data->texture.texture[4] = 0;
+	ft_free_tab(file);
 	return (0);
 }

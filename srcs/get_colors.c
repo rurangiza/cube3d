@@ -102,7 +102,8 @@ int	get_colors(t_data *data, char **file)
 		}
 		i++;
 	}
-	if (floor == 0 || ceiling == 0 || data->c_color == -1 || data->f_color == -1)
+	if (floor == 0 || ceiling == 0
+		|| data->c_color == -1 || data->f_color == -1)
 		return (errormsg("related to Floor or Celing colors", INVALID));
 	return (VALID);
 }
