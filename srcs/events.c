@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:49:44 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:36:06 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:52:35 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	ft_key_press(int keycode, t_data *data)
 	if (keycode == 53)
 	{
 		mlx_destroy_window(data->mlx.mlx, data->mlx.mlx_win);
+		ft_free_all(data);
 		exit (0);
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 15:11:23 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/24 13:48:55 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/30 11:49:18 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_close(t_data *data)
 {
 	mlx_destroy_window(data->mlx.mlx, data->mlx.mlx_win);
+	ft_free_all(data);
 	exit (0);
 }
 

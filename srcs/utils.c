@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:43:53 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 14:56:13 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:48:10 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,14 @@ void	ft_free_all(t_data *data)
 		free(data->map[i]);
 		i++;
 	}
+	i = 0;
+	while (data->texture.texture[i])
+	{
+		free(data->texture.texture[i]);
+		i++;
+	}
 	free(data->map);
+	free(data->texture.tex);
+	free(data->texture.texture);
+	free(data->texture.tex_tab);
 }

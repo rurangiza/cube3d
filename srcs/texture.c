@@ -3,14 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lupin <lupin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 14:23:06 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/23 13:56:09 by lupin            ###   ########.fr       */
+/*   Updated: 2023/05/25 14:58:35 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	check_xpm2(char *texture)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = NULL;
+	i = ft_strlen(texture) - 1;
+	while (texture[i--] == 'm')
+	{
+		if (texture[i--] == 'p')
+		{
+			if (texture[i--] == 'x')
+			{
+				if (texture[i--] == '.')
+					return (1);
+			}
+		}
+	}
+	return (0);
+}
+
+int	check_xpm(t_data *data)
+{
+	int		i;
+
+	i = 0;
+	while (data->texture.texture[i])
+	{
+		if (!check_xpm2(data->texture.texture[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	check_texture(t_data *data)
 {
@@ -18,6 +54,8 @@ int	check_texture(t_data *data)
 	int	i;
 
 	i = 0;
+	if (!check_xpm(data))
+		return (0);
 	while (data->texture.texture[i])
 	{
 		fd = open(data->texture.texture[i], O_RDONLY);
