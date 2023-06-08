@@ -6,7 +6,7 @@
 /*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:14:53 by akorompa          #+#    #+#             */
-/*   Updated: 2023/05/30 14:18:09 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/06/07 12:33:39 by akorompa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	get_colors(t_data *data, char **file)
 		}
 		i++;
 	}
-	if (floor == 0 || ceiling == 0
+	if (floor != 1 || ceiling != 1
 		|| data->c_color == -1 || data->f_color == -1)
 		return (errormsg("related to Floor or Celing colors", INVALID));
 	return (VALID);

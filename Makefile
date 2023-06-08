@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+         #
+#    By: arurangi <arurangi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 13:24:37 by lupin             #+#    #+#              #
-#    Updated: 2023/05/30 13:24:28 by akorompa         ###   ########.fr        #
+#    Updated: 2023/06/08 15:37:32 by arurangi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ INCLUDES		= includes/cub3d.h
 
 OBJS	= ${SRCS:.c=.o}
 
-NAME 	= cub3d
+NAME 	= cub3D
 
 LIBFT = libft
 
