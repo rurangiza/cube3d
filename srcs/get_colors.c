@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_colors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akorompa <akorompa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arurangi <arurangi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 14:14:53 by akorompa          #+#    #+#             */
-/*   Updated: 2023/06/07 12:33:39 by akorompa         ###   ########.fr       */
+/*   Updated: 2023/06/12 10:56:21 by arurangi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 int	int_to_color(t_rgb *rgb)
 {
 	int	color;
+
+	if (rgb->r > 255 || rgb->g > 255 || rgb->b > 255)
+	{
+		color = -1;
+		return (color);
+	}
 
 	color = (rgb->r << 16) + (rgb->g << 8) + rgb->b;
 	return (color);
